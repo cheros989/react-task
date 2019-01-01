@@ -2,14 +2,6 @@ import React, { Component } from "react";
 import { ListGroup, ListGroupItem } from 'reactstrap';
 
 export default class Profile extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      city: '',
-      languages: [],
-      social: []
-    }
-  }
   componentWillMount() {
     this.props.startPreload()
   }
@@ -23,7 +15,7 @@ export default class Profile extends Component {
           return
         }
         
-        this.setState({
+        this.props.setUserData({
           city: data.data.city,
           languages: data.data.languages,
           social: data.data.social
@@ -32,16 +24,17 @@ export default class Profile extends Component {
       });
   }
   render() {
+    console.log(this.props)
     return (
       <div>
-        <div>Город: {this.state.city}</div>
+        <div>Город: {this.props.userData.city}</div>
         Знание языков:
         <ListGroup>
-            {this.state.languages.map(language => <ListGroupItem key={language}>{language}</ListGroupItem>)}
+            {this.props.userData.languages.map(language => <ListGroupItem key={language}>{language}</ListGroupItem>)}
         </ListGroup>
         Ссылки:
         <ListGroup>
-          {this.state.social.map(social => <ListGroupItem key={social.label}>{social.label}</ListGroupItem>)}
+          {this.props.userData.social.map(social => <ListGroupItem key={social.label}>{social.label}</ListGroupItem>)}
         </ListGroup>
       </div>
     )

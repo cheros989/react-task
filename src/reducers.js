@@ -1,5 +1,11 @@
 import { combineReducers } from 'redux';
-import { SET_AUTHENTICATED, PRELOAD_ENABLE, PRELOAD_DISABLE } from './actions';
+import { 
+    SET_AUTHENTICATED,
+    PRELOAD_ENABLE,
+    PRELOAD_DISABLE,
+    SET_USER_DATA,
+    CLEAR_USER_DATA 
+  } from './actions';
 
 function login(state = {currentUser: null}, action) {
   if (action.type === SET_AUTHENTICATED) {
@@ -26,9 +32,29 @@ function preload(state = {isLoading: false}, action) {
   }
 }
 
+const userState = {
+  userData: {
+    'city': '',
+    'languages': [],
+    'social': []
+  }
+}
+
+function user(state = userState, action) {
+  switch (action.type) {
+    case SET_USER_DATA:
+      return Object.assign({}, state, action.data)
+    case CLEAR_USER_DATA:
+      return {}
+    default:
+      return state
+  }
+}
+
 const app = combineReducers({
   login,
-  preload
+  preload, 
+  user
 })
 
 export default app
