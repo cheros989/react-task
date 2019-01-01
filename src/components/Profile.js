@@ -19,7 +19,7 @@ export default class Profile extends Component {
       .then(data => {
         if (data.status === 'err') {
           this.props.alert.error('You aren\'t assigned in. Fuck you.')
-          this.props.stopPreload()
+          this.props.history.push('/login')
           return
         }
         
@@ -37,11 +37,11 @@ export default class Profile extends Component {
         <div>Город: {this.state.city}</div>
         Знание языков:
         <ListGroup>
-            {this.state.languages.map(language => <ListGroupItem>{language}</ListGroupItem>)}
+            {this.state.languages.map(language => <ListGroupItem key={language}>{language}</ListGroupItem>)}
         </ListGroup>
         Ссылки:
         <ListGroup>
-          {this.state.social.map(social => <ListGroupItem>{social.label}</ListGroupItem>)}
+          {this.state.social.map(social => <ListGroupItem key={social.label}>{social.label}</ListGroupItem>)}
         </ListGroup>
       </div>
     )
