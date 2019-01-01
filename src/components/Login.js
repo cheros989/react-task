@@ -54,6 +54,7 @@ export class Login extends Component {
         this.props.alert.success('Logged in.')
       } else {
         this.props.alert.error('Incorrect login or password.')
+        this.props.stopPreload()
       }
      })
   }
