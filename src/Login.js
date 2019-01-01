@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 export class Login extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       email: '',
       password: ''
@@ -29,7 +29,23 @@ export class Login extends Component {
 
   onFormSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state.email + ' --> ' + this.state.password)
+    fetch('https://mysterious-reef-29460.herokuapp.com/api/v1/validate', {
+      method: 'post',
+      body: JSON.stringify({
+        "email": this.state.email,
+        "password": this.state.password
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+     }).then((response) => {
+      return response.text()
+     }).then((stringData) => {
+      let data = JSON.parse(stringData);
+      if (data.status === "ok") {
+        
+      }
+     })
   }
 }
 
