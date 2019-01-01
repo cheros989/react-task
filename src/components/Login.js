@@ -43,7 +43,8 @@ export class Login extends Component {
      }).then((stringData) => {
       let data = JSON.parse(stringData);
       if (data.status === "ok") {
-        
+        this.props.authenticate(true)
+        this.props.history.push('/')
       }
      })
   }

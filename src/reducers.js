@@ -7,8 +7,12 @@ const initialState = {
 
 function login(state = initialState, action) {
   
-  if (action.type === SET_AUTHENTICATED)
-    state.isAuthenticated = action.isAuthenticated
+  console.log(action.type)
+  if (action.type === SET_AUTHENTICATED) {
+    return Object.assign({}, state, {
+      isAuthenticated: action.isAuthenticated
+    })
+  }
 
   return state
 }

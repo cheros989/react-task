@@ -8,10 +8,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import app from './reducers';
 import { createStore } from 'redux';
-import { authenticate } from './actions';
 
 const store = createStore(app)
-store.dispatch(authenticate(true))
 
 ReactDOM.render((
   <Provider store={store}>
