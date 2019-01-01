@@ -1,8 +1,8 @@
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED'
 
-export function authenticate(isAuthenticated) {
+export function authenticate(currentUser) {
   return {
     type: SET_AUTHENTICATED,
-    isAuthenticated: isAuthenticated
+    currentUser: currentUser
   }
 }

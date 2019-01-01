@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { SET_AUTHENTICATED } from './actions';
 
 const initialState = {
-  isAuthenticated: false
+  currentUser: null
 }
 
 function login(state = initialState, action) {
@@ -10,7 +10,7 @@ function login(state = initialState, action) {
   console.log(action.type)
   if (action.type === SET_AUTHENTICATED) {
     return Object.assign({}, state, {
-      isAuthenticated: action.isAuthenticated
+      currentUser: action.currentUser
     })
   }
 

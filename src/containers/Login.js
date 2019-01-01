@@ -1,16 +1,21 @@
 import { connect } from 'react-redux'
 import { authenticate } from '../actions'
 import Login from '../components/Login'
+import { withAlert } from "react-alert";
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.login.isAuthenticated
+  currentUser: state.login.currentUser
 })
 
 const mapDispatchToProps = dispatch => ({
-    authenticate: isAuthenticated => dispatch(authenticate(isAuthenticated))
+    authenticate: currentUser => dispatch(authenticate(currentUser))
 })
 
-export default connect(
+const mappedLogin = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Login)
+
+const withAlertMappedLogin = withAlert(mappedLogin)
+
+export default withAlertMappedLogin

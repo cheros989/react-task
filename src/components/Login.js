@@ -43,8 +43,12 @@ export class Login extends Component {
      }).then((stringData) => {
       let data = JSON.parse(stringData);
       if (data.status === "ok") {
-        this.props.authenticate(true)
-        this.props.history.push('/')
+        let id = data.data.id
+        this.props.authenticate(id)
+        this.props.history.push('/profile')
+        this.props.alert.success('Logged in.')
+      } else {
+        this.props.alert.error('Incorrect login or password.')
       }
      })
   }
