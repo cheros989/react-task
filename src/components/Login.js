@@ -11,6 +11,10 @@ export class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.stopPreload()
+  }
+
   render() {
     return (
       <Form style={{ width: '600px', margin: '20px auto' }} onSubmit={this.onFormSubmit}>

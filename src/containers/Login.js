@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { authenticate } from '../actions'
+import { authenticate, startPreload, stopPreload } from '../actions'
 import Login from '../components/Login'
 import { withAlert } from "react-alert";
 
@@ -8,14 +8,12 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    authenticate: currentUser => dispatch(authenticate(currentUser))
+    authenticate: currentUser => dispatch(authenticate(currentUser)),
+    startPreload: () => dispatch(startPreload()),
+    stopPreload: () => dispatch(stopPreload())
 })
 
-const mappedLogin = connect(
+export default withAlert(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login)
-
-const withAlertMappedLogin = withAlert(mappedLogin)
-
-export default withAlertMappedLogin
+)(Login))

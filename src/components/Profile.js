@@ -10,34 +10,40 @@ export default class Profile extends Component {
       social: []
     }
   }
+  componentWillMount() {
+    this.props.startPreload()
+  }
   componentDidMount() {
     fetch('https://mysterious-reef-29460.herokuapp.com/api/v1/user-info/' + this.props.currentUser)
       .then(response => response.json())
       .then(data => {
-        if (data.status === 'err')
+        if (data.status === 'err') {
+          this.props.alert.error('You aren\'t assigned in. Fuck you.')
+          this.props.stopPreload()
           return
+        }
         
         this.setState({
           city: data.data.city,
           languages: data.data.languages,
           social: data.data.social
         })
+        this.props.stopPreload()
       });
   }
   render() {
-    console.log(this.state)
     return (
-      <ListGroup>
+      <div>
         <div>Город: {this.state.city}</div>
-        Знание языков: 
-        <ListGroupItem>
-          {this.state.languages.map(language => <li key={language}>{language}</li>)}
-        </ListGroupItem>
+        Знание языков:
+        <ListGroup>
+            {this.state.languages.map(language => <ListGroupItem>{language}</ListGroupItem>)}
+        </ListGroup>
         Ссылки:
-        <ListGroupItem>
-          {this.state.social.map(social => <li key={social.label}>{social.label}</li>)}
-        </ListGroupItem>
-      </ListGroup>
+        <ListGroup>
+          {this.state.social.map(social => <ListGroupItem>{social.label}</ListGroupItem>)}
+        </ListGroup>
+      </div>
     )
   }
 }
